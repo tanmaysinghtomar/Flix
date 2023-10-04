@@ -1,0 +1,48 @@
+<template>  
+      <!--Spinner -->
+      <div class="spinner">
+        <template if:true={isLoading}>
+             <lightning-spinner alternative-text="Loading" variant="base" size="medium">
+             </lightning-spinner>
+        </template>
+    </div>
+    <lightning-quick-action-panel header="Account Contract Clauses">
+        <template if:true={contractClauses}>
+            <lightning-datatable
+                key-field="id"
+                data={contractClauses}
+                columns={columns}
+                hide-checkbox-column="true">
+            </lightning-datatable>
+        </template>
+        <template if:false={contractClauses}>No Account Contract Clauses found for this Billing Country.</template>
+        <template if:true={showProceedButton}>
+        <div slot="footer">
+            <lightning-button
+                variant="neutral"
+                label="Close"
+                onclick={closeModal}
+            ></lightning-button>
+
+            <lightning-button
+                variant="brand"
+                label="Proceed"
+                class="slds-m-left_x-small"
+                onclick={handleProceed}
+            ></lightning-button>
+        </div>
+        </template>
+        <template if:false={showProceedButton}>
+            <div class="slds-text-align_center slds-m-top_medium">
+                <a href={recordPageUrl} target="_blank" onclick={handleNavigation}>View New Account Contract</a>
+            </div>
+            <div slot="footer">
+                <lightning-button
+                    variant="neutral"
+                    label="Close"
+                    onclick={closeModal}
+                ></lightning-button>
+                </div>
+        </template>
+    </lightning-quick-action-panel>     
+  </template>
